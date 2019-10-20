@@ -1,0 +1,76 @@
+<ac-toolbar></ac-toolbar>
+
+<ac-container>
+
+  <form id="customerForm" [formGroup]="customerForm" [loader]="isLoading">
+    <div class="form-row">
+      <div class="form-group col-12">
+        <label for="inputName">Nome Completo</label>
+        <input type="text" class="form-control" [ngClass]="checkInvalid('name')"
+               id="inputName" placeholder="João da Silva" formControlName="name">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputDoc">CPF</label>
+        <input type="text" class="form-control" [ngClass]="checkInvalid('doc')"
+               mask="000.000.000-00" [showMaskTyped]="true"
+               id="inputDoc" placeholder="000.000.000-00" formControlName="doc">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPhone">Telefone</label>
+        <input type="text" class="form-control" [ngClass]="checkInvalid('phone')"
+               mask="(00) 000000009"
+               id="inputPhone" placeholder="(48) 996636056" formControlName="phone">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputBirth">Data de Nascimento</label>
+        <input type="text" class="form-control" [ngClass]="checkInvalid('birth')"
+               mask="00/00/0000" [showMaskTyped]="true"
+               id="inputBirth" placeholder="23/08/1990" formControlName="birth">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="inputAddress">Logradouro</label>
+        <input type="text" class="form-control" [ngClass]="checkInvalid('address')"
+               id="inputAddress" placeholder="Rua Presidente Getúlio, 1234" formControlName="address">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputComplement">Complemento</label>
+        <input type="text" class="form-control" [ngClass]="checkInvalid('complement')"
+               id="inputComplement" placeholder="Casa, apartamento, loja"
+               formControlName="complement">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputCity">Cidade</label>
+        <input type="text" class="form-control" [ngClass]="checkInvalid('city')"
+               id="inputCity" placeholder="São Paulo" formControlName="city">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputState">Estado</label>
+        <input type="text" class="form-control" [ngClass]="checkInvalid('state')"
+               mask="SS" [showMaskTyped]="true"
+               id="inputState" placeholder="SP" formControlName="state">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputVehicleBrand">Marca</label>
+        <select id="inputVehicleBrand" class="form-control" [ngClass]="checkInvalid('vehicle_brand')"
+                formControlName="vehicle_brand" (change)="changeVehicleBrand($event.target)">
+          <option *ngFor="let brand of vehiclesBrands" [value]="brand.codigo">{{brand?.nome}}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputVehicleModel">Modelo</label>
+        <select id="inputVehicleModel" class="form-control" [ngClass]="checkInvalid('vehicle_model')"
+                formControlName="vehicle_model" (change)="changeVehicleModel($event.target)">
+          <option *ngFor="let model of vehiclesModels" [value]="model.codigo">{{model?.nome}}</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn btn-primary btnSubmit" [disabled]="customerForm.invalid" (click)="setCustomer()">
+      <span>Salvar Cadastro</span>
+    </button>
+  </form>
+
+</ac-container>

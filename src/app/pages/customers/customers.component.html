@@ -1,0 +1,50 @@
+<ac-toolbar></ac-toolbar>
+
+<ac-container>
+
+  <div class="table-responsive" *ngIf="customers && customers.length > 0; else emptyList">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Veículo</th>
+        <th scope="col" wd-auto>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let customer of customers">
+        <th scope="row">{{customer?.id}}</th>
+        <td>{{customer?.name}}</td>
+        <td>{{customer?.phone}}</td>
+        <td>{{customer?.vehicle_model_name}}</td>
+        <td wd-auto>
+          <button type="button" class="btn btn-primary btn-sm" [routerLink]="['customer-form', customer.id]">
+            Editar
+          </button>
+          <button type="button" class="btn text-danger btn-sm"
+                  (click)="alertRemoveCustomer(modalRemoveCustomer, customer.id)">
+            Excluir
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #emptyList>
+    <div class="alert alert-info" role="alert">
+      Nenhum cliente encontrado. <a [routerLink]="['customer-form']" class="alert-link">Inserir novo cliente</a>
+    </div>
+  </ng-template>
+
+</ac-container>
+
+<ng-template #modalRemoveCustomer>
+  <div class="modal-body text-center">
+    <p>Deseja remover cadastro?</p>
+    <button type="button" class="btn btn-default text-danger" (click)="confirmRemoveCustomer(true)">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="confirmRemoveCustomer(false)">Não</button>
+  </div>
+</ng-template>

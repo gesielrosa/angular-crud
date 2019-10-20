@@ -1,0 +1,13 @@
+@import 'variables';
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+
+body {
+  margin: 0;
+}
+
+[wd-auto] {
+  width: 1px;
+  white-space: nowrap;
+  text-align: center;
+}
